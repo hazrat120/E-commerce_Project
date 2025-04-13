@@ -44,11 +44,11 @@ Route::prefix('')->group(function(){
 
     /*AJAX Call */
     Route::get('/upzilla/ajax/{district_id}', [CheckoutController::class, 'loadUpazillaAjax'])->name('loadupazila.ajax');
-
+    Route::get('logout', [RegisterController::class, 'logout'])->name('customer.logout');
 
     Route::prefix('customer/')->middleware(['auth', 'is_customer'])->group(function(){
         Route::get('dashboard',[CustomerController::class, 'dashboard'])->name('customer.dashboard');
-        Route::get('logout', [RegisterController::class, 'logout'])->name('customer.logout');
+       
         /*Coupon apply & remove */
         Route::post('cart/apply-coupon', [CartController::class, 'couponApply'])->name('customer.couponapply');
         Route::get('cart/remove-coupon/{coupon_name}', [CartController::class, 'removeCoupon'])->name('customer.couponremove');
@@ -71,11 +71,11 @@ Route::prefix('')->group(function(){
 Route::prefix('admin/')->group(function(){
     Route::get('login', [LoginController::class, 'loginPage'])->name('admin.loginpage');
     Route::post('login', [LoginController::class, 'login'])->name('admin.login');
-
+    Route::get('logout', [LoginController::class, 'logout'])->name('admin.logout');
 
     Route::middleware(['auth', 'is_admin'])->group(function(){
         Route::get('dashboard', [DashboardController::class, 'dashboard'])->name('admin.dashboard');
-        Route::get('logout', [LoginController::class, 'logout'])->name('admin.logout');
+       
 
          /*Resource Controller*/
         Route::resource('category', CategoryController::class);
