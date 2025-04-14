@@ -45,30 +45,24 @@ class RegisterController extends Controller
 
 
     }
+
     public function loginStore(Request $request)
     {
-        $validated = $request->validate([
+        $request->validate([
             'email' => 'required|email',
-            'password' => 'required|string|min:4'
+            'password' => 'required|string|min:4',
         ]);
 
-        $credentials = [
-            'email' => $request->email,
-            'password' => $request->password,
-        ];
-
-        // login attempt if success then redirect dashboard
-        if(Auth::attempt($credentials, $request->filled('remember'))){
+        if(Auth::attempt(['email' => $request->email, 'password' => $request->password])) {
             $request->session()->regenerate();
             return redirect()->intended('customer/dashboard');
         }
 
-        // return error message
         return back()->withErrors([
-            'email' => 'Wrong Credentials found!'
-        ])->onlyInput('email');
-
+            'email' => 'The provided credentials do not match our records.',
+        ]);
     }
+
 
     public function logout(Request $request)
     {

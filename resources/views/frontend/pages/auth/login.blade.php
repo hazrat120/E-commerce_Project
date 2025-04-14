@@ -19,7 +19,7 @@
                         </span>
                         @enderror
                         <p>Password <span class="text-danger">*</span></p>
-                        <input type="Password" name="password" class="form-control @error('email') is-invalid @enderror">
+                        <input type="Password" name="password" class="form-control @error('password') is-invalid @enderror">
                         @error('password')
                         <span class="invalid-feedback" role="alert">
                             <strong>{{ $message }}</strong>
