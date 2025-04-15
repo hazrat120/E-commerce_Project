@@ -25,11 +25,6 @@ class LoginController extends Controller
             'password' => $request->password,
         ];
 
-        if(Auth::guard('admin')->attempt($credentials, $request->filled('remember'))){
-            $request->session()->regenerate();
-            return redirect()->route('admin.dashboard');
-        }
-
         // login attempt if success then redirect dashboard
         if(Auth::attempt($credentials, $request->filled('remember'))){
             $request->session()->regenerate();

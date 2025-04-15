@@ -35,15 +35,14 @@ return [
     |
     */
 
-    // config/auth.php
     'guards' => [
         'web' => [
             'driver' => 'session',
             'provider' => 'users',
         ],
-        'admin' => [
+        'admin' => [ // এডমিন গার্ড
             'driver' => 'session',
-            'provider' => 'admins',
+            'provider' => 'users', // একই প্রোভাইডার ব্যবহার
         ],
     ],
 
